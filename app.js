@@ -52,10 +52,19 @@ let game = (function() {
 		return (leftDiagonal || rightDiagonal) && notNull;
 	};
 
+	let checkVerticals = function() {
+		var leftVertical = gameBoard[0][0] === gameBoard[1][0] && gameBoard[1][0] === gameBoard[2][0] && gameBoard[1][0] !== null;
+		var middleVertical = gameBoard[0][1] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][1] && gameBoard[1][1] !== null;
+		var rightVertical = gameBoard[0][2] === gameBoard[1][2] && gameBoard[1][2] === gameBoard[2][2] && gameBoard[1][2] !== null;
+
+		return (leftVertical || middleVertical || rightVertical);
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
 		resetGameBoard: resetGameBoard,
-		checkDiagonals: checkDiagonals
+		checkDiagonals: checkDiagonals,
+		checkVerticals: checkVerticals
 	};
 })();

@@ -73,6 +73,10 @@ describe('Game Logic', function() {
 	});
 
 	describe('#checkDiagonals', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
 		it('should return false if the diagonal is all null', function() {
 			var result = game.checkDiagonals();
 
@@ -87,6 +91,49 @@ describe('Game Logic', function() {
 			var result = game.checkDiagonals();
 
 			expect(result).toBe(true);
+		});
+
+		it('should return false if diagonal doesn\'t match', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([1, 0], 'x');
+			game.setGameBoard([2, 0], 'x');
+
+			console.log('abc');
+			var result = game.checkDiagonals();
+
+			expect(result).toBe(false);
+		});
+	});
+
+	describe('#checkVerticals', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
+		it('should return false if the verticals are all null', function() {
+			var result = game.checkVerticals();
+
+			expect(result).toBe(false);
+		});
+
+		it('should return true if any of the verticals match', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([1, 0], 'x');
+			game.setGameBoard([2, 0], 'x');
+
+			var result = game.checkVerticals();
+
+			expect(result).toBe(true);
+		});
+
+		it('should return false if vertical doesn\'t match', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([1, 0], 'x');
+			game.setGameBoard([2, 0], 'o');
+
+			var result = game.checkVerticals();
+
+			expect(result).toBe(false);
 		});
 	});
 });
