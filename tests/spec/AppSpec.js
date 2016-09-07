@@ -106,7 +106,7 @@ describe('Game Logic', function() {
 			expect(result).toBe(false);
 		});
 
-		it('should return true if there is a winner on vertical', function() {
+		it('should return winner\'s token if there is a winner on vertical', function() {
 			game.setGameBoard([0, 0], 'x');
 			game.setGameBoard([0, 1], 'o');
 			game.setGameBoard([1, 0], 'x');
@@ -118,7 +118,7 @@ describe('Game Logic', function() {
 			expect(result).toBe('x');
 		});
 
-		it('should return true if there is a winner on horizontal', function() {
+		it('should return winner\'s token if there is a winner on horizontal', function() {
 			game.setGameBoard([0, 0], 'x');
 			game.setGameBoard([1, 0], 'o');
 			game.setGameBoard([0, 1], 'x');
@@ -130,7 +130,7 @@ describe('Game Logic', function() {
 			expect(result).toBe('x');
 		});
 
-		it('should return true if there is a winner on diagonal', function() {
+		it('should return winner\'s token if there is a winner on diagonal', function() {
 			game.setGameBoard([0, 2], 'x');
 			game.setGameBoard([0, 0], 'o');
 			game.setGameBoard([1, 1], 'x');
@@ -150,6 +150,24 @@ describe('Game Logic', function() {
 			var result = game.checkForWinner();
 
 			expect(result).toBe(false);
+		});
+
+		it('should return tie if board is full and there is no winner', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([0, 1], 'o');
+			game.setGameBoard([0, 2], 'x');
+
+			game.setGameBoard([1, 0], 'o');
+			game.setGameBoard([1, 1], 'x');
+			game.setGameBoard([1, 2], 'o');
+
+			game.setGameBoard([2, 0], 'o');
+			game.setGameBoard([2, 1], 'x');
+			game.setGameBoard([2, 2], 'o');
+
+			var result = game.checkForWinner();
+
+			expect(result).toBe('tie');
 		});
 	});
 

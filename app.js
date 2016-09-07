@@ -123,8 +123,20 @@ let game = (function() {
 		return (leftHorizontal || middleHorizontal || rightHorizontal);
 	};
 
+	let isBoardFull = function() {
+		for(var i = 0; i < gameBoard.length; i++) {
+			for(var j = 0; j < gameBoard[i].length; j++) {
+				if(gameBoard[i][j] === null) {
+					return false;
+				}
+			}
+		}
+
+		return 'tie';
+	};
+
 	let checkForWinner = function() {
-		return (checkDiagonals() || checkVerticals() || checkHorizontals());
+		return (checkDiagonals() || checkVerticals() || checkHorizontals() || isBoardFull());
 	};
 
 	let getCurrentPlayer = function() {
