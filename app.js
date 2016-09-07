@@ -68,12 +68,17 @@ let game = (function() {
 		return (leftHorizontal || middleHorizontal || rightHorizontal);
 	};
 
+	let checkForWinner = function() {
+		return (checkDiagonals() || checkVerticals() || checkHorizontals());
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
 		resetGameBoard: resetGameBoard,
 		checkDiagonals: checkDiagonals,
 		checkVerticals: checkVerticals,
-		checkHorizontals: checkHorizontals
+		checkHorizontals: checkHorizontals,
+		checkForWinner: checkForWinner
 	};
 })();

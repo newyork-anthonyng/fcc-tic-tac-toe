@@ -98,7 +98,6 @@ describe('Game Logic', function() {
 			game.setGameBoard([1, 0], 'x');
 			game.setGameBoard([2, 0], 'x');
 
-			console.log('abc');
 			var result = game.checkDiagonals();
 
 			expect(result).toBe(false);
@@ -164,6 +163,64 @@ describe('Game Logic', function() {
 			game.setGameBoard([0, 2], 'o');
 
 			var result = game.checkHorizontals();
+
+			expect(result).toBe(false);
+		});
+	});
+
+	describe('#checkForWinner', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
+		it('should return false if squares are all null', function() {
+			var result = game.checkForWinner();
+
+			expect(result).toBe(false);
+		});
+
+		it('should return true if there is a winner on vertical', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([0, 1], 'o');
+			game.setGameBoard([1, 0], 'x');
+			game.setGameBoard([1, 1], 'o');
+			game.setGameBoard([2, 0], 'x');
+
+			var result = game.checkForWinner();
+
+			expect(result).toBe(true);
+		});
+
+		it('should return true if there is a winner on horizontal', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([1, 0], 'o');
+			game.setGameBoard([0, 1], 'x');
+			game.setGameBoard([2, 0], 'o');
+			game.setGameBoard([0, 2], 'x');
+
+			var result = game.checkForWinner();
+
+			expect(result).toBe(true);
+		});
+
+		it('should return true if there is a winner on diagonal', function() {
+			game.setGameBoard([0, 2], 'x');
+			game.setGameBoard([0, 0], 'o');
+			game.setGameBoard([1, 1], 'x');
+			game.setGameBoard([2, 2], 'o');
+			game.setGameBoard([2, 0], 'x');
+
+			var result = game.checkForWinner();
+
+			expect(result).toBe(true);
+		});
+
+		it('should return false if there is no winner', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([0, 1], 'o');
+			game.setGameBoard([0, 2], 'x');
+
+			var result = game.checkForWinner();
 
 			expect(result).toBe(false);
 		});
