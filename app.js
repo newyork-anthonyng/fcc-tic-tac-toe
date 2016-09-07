@@ -10,6 +10,7 @@ let game = (function() {
 		[null, null, null],
 		[null, null, null]
 	];
+	let currentPlayer = 'x';
 
 	let getGameBoard = function() {
 		return gameBoard;
@@ -61,10 +62,24 @@ let game = (function() {
 		return (checkDiagonals() || checkVerticals() || checkHorizontals());
 	};
 
+	let getCurrentPlayer = function() {
+		return currentPlayer;
+	};
+
+	let nextTurn = function() {
+		if(currentPlayer === 'x') {
+			currentPlayer = 'o';
+		} else {
+			currentPlayer = 'x';
+		}
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
 		resetGameBoard: resetGameBoard,
-		checkForWinner: checkForWinner
+		checkForWinner: checkForWinner,
+		getCurrentPlayer: getCurrentPlayer,
+		nextTurn: nextTurn
 	};
 })();

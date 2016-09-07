@@ -129,4 +129,23 @@ describe('Game Logic', function() {
 			expect(result).toBe(false);
 		});
 	});
+
+	describe('#getCurrentPlayer', function() {
+		it('should return the token of the current player', function() {
+			var result = game.getCurrentPlayer();
+
+			expect(result).toEqual('x');
+		});
+	});
+
+	describe('#nextTurn', function() {
+		it('should toggle the token of the current player', function() {
+			var result = game.getCurrentPlayer();
+			expect(result).toEqual('x');
+
+			game.nextTurn();
+			result = game.getCurrentPlayer();
+			expect(result).toEqual('o');
+		});
+	});
 });
