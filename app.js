@@ -14,6 +14,9 @@ function playMove(coords) {
 		var winner = game.checkForWinner();
 		if(winner) {
 			alert('Winner! ' + winner);
+			game.incrementScore(winner);
+			renderScore();
+
 			game.resetGameBoard();
 			return;
 		}
@@ -41,6 +44,13 @@ function renderSquares() {
 			$(this).addClass('player-o');
 		}
 	});
+}
+
+function renderScore() {
+	var scores = game.getScore();
+	var scoreText = 'x: ' + scores['x'] + ', o: ' + scores['o'];
+
+	$('.score').text(scoreText);
 }
 
 let game = (function() {
@@ -81,10 +91,6 @@ let game = (function() {
 		];
 
 		currentPlayer = 'x';
-		score = {
-			x: 0,
-			o: 0
-		};
 	};
 
 	let checkDiagonals = function() {
@@ -138,6 +144,13 @@ let game = (function() {
 		score[player]++;
 	};
 
+	let resetScore = function() {
+		score = {
+			x: 0,
+			o: 0
+		};
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
@@ -147,6 +160,7 @@ let game = (function() {
 		nextTurn: nextTurn,
 		playerTakesTurn: playerTakesTurn,
 		getScore: getScore,
-		incrementScore: incrementScore
+		incrementScore: incrementScore,
+		resetScore: resetScore
 	};
 })();

@@ -49,12 +49,12 @@ describe('Game Logic', function() {
 			expect(game.getCurrentPlayer()).toEqual('x');
 		});
 
-		it('should reset score', function() {
+		it('should not reset score', function() {
 			game.incrementScore('x');
 			game.resetGameBoard();
 
 			var result = game.getScore();
-			expect(result).toEqual({ x: 0, o: 0 });
+			expect(result).toEqual({ x: 1, o: 0 });
 		});
 	});
 
@@ -202,6 +202,10 @@ describe('Game Logic', function() {
 	});
 
 	describe('#getScore', function() {
+		beforeEach(function() {
+			game.resetScore();
+		});
+
 		it('should return an object with the current score', function() {
 			var result = game.getScore();
 
@@ -212,13 +216,27 @@ describe('Game Logic', function() {
 	describe('#incrementScore', function() {
 		afterEach(function() {
 			game.resetGameBoard();
+			game.resetScore();
 		});
 
 		it('should increment the score for given player', function() {
 			game.incrementScore('x');
 			var result = game.getScore();
-
 			expect(result).toEqual({ x: 1, o: 0 });
+
+			game.incrementScore('o');
+			result = game.getScore();
+			expect(result).toEqual({ x: 1, o: 1 });
+		});
+	});
+
+	describe('#resetScore', function() {
+		it('should reset the score of the game', function() {
+			game.incrementScore('x');
+			game.resetScore();
+
+			var result = game.getScore();
+			expect(result).toEqual({ x: 0, o: 0 });
 		});
 	});
 });
