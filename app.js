@@ -26,7 +26,27 @@ let game = (function() {
 		return gameBoard;
 	};
 
+	let setGameBoard = function(coord, token) {
+		var x = coord[0];
+		var y = coord[1];
+
+		var invalidCoord = (x < 0 || x > 2) || (y < 0 || y > 2);
+		if(invalidCoord) return;
+
+		gameBoard[x][y] = token;
+	};
+
+	let resetGameBoard = function() {
+		gameBoard = [
+			[null, null, null],
+			[null, null, null],
+			[null, null, null]
+		];
+	};
+
 	return {
-		getGameBoard: getGameBoard
+		getGameBoard: getGameBoard,
+		setGameBoard: setGameBoard,
+		resetGameBoard: resetGameBoard
 	};
 })();
