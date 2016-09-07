@@ -5,6 +5,13 @@ $(function() {
 		playMove($(this).data('coord'));
 		render();
 	});
+
+	$('button').click(function() {
+		game.resetGameBoard();
+		game.resetScore();
+		render();
+		renderScore();
+	});
 });
 
 function playMove(coords) {
