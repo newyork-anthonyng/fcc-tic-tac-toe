@@ -136,4 +136,36 @@ describe('Game Logic', function() {
 			expect(result).toBe(false);
 		});
 	});
+
+	describe('#checkHorizontals', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
+		it('should return false if the horizontals are all null', function() {
+			var result = game.checkHorizontals();
+
+			expect(result).toBe(false);
+		});
+
+		it('should return true if any of the horizontals match', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([0, 1], 'x');
+			game.setGameBoard([0, 2], 'x');
+
+			var result = game.checkHorizontals();
+
+			expect(result).toBe(true);
+		});
+
+		it('should return false if horizontal doesn\'t match', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([0, 1], 'x');
+			game.setGameBoard([0, 2], 'o');
+
+			var result = game.checkHorizontals();
+
+			expect(result).toBe(false);
+		});
+	});
 });

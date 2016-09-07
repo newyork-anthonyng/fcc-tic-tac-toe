@@ -60,11 +60,20 @@ let game = (function() {
 		return (leftVertical || middleVertical || rightVertical);
 	};
 
+	let checkHorizontals = function() {
+		var leftHorizontal = gameBoard[0][0] === gameBoard[0][1] && gameBoard[0][1] === gameBoard[0][2] && gameBoard[0][1] !== null;
+		var middleHorizontal = gameBoard[1][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[1][2] && gameBoard[1][1] !== null;
+		var rightHorizontal = gameBoard[2][0] === gameBoard[2][1] && gameBoard[2][1] === gameBoard[2][2] && gameBoard[2][1] !== null;
+
+		return (leftHorizontal || middleHorizontal || rightHorizontal);
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
 		resetGameBoard: resetGameBoard,
 		checkDiagonals: checkDiagonals,
-		checkVerticals: checkVerticals
+		checkVerticals: checkVerticals,
+		checkHorizontals: checkHorizontals
 	};
 })();
