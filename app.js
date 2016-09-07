@@ -1,24 +1,36 @@
 'use strict';
 
 $(function() {
-	console.log('app.js loaded.');
-
 	$('.square').click(function() {
-		console.log('You clicked me');
-		console.log($(this).data('coord'));
+		playMove($(this).data('coord'));
 		render();
 	});
 });
 
-function render() {
-	let gameBoard = game.getGameBoard();
+function playMove(coords) {
+	var playerDidMove = game.playerTakesTurn(coords);
 
+	if(playerDidMove) {
+		var winner = game.checkForWinner();
+		if(winner) {
+			alert('Winner! ' + winner);
+			game.resetGameBoard();
+			return;
+		}
+
+		game.nextTurn();
+	}
+}
+
+function render() {
 	renderSquares();
 }
 
 function renderSquares() {
 	$('.square').each(function() {
 		var myCoord = $(this).data('coord');
+
+		let gameBoard = game.getGameBoard();
 		var myToken = gameBoard[myCoord[0]][myCoord[1]];
 
 		$(this).removeClass('player-x player-o');
