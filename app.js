@@ -41,25 +41,24 @@ let game = (function() {
 	};
 
 	let checkDiagonals = function() {
-		var leftDiagonal = gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2];
-		var rightDiagonal = gameBoard[0][2] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][0];
-		var notNull = !(gameBoard[1][1] === null);
+		var leftDiagonal = (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2] && gameBoard[1][1] !== null) ? gameBoard[0][0] : false;
+		var rightDiagonal = (gameBoard[0][2] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][0] && gameBoard[1][1] !== null) ? gameBoard[0][2] : false;
 
-		return (leftDiagonal || rightDiagonal) && notNull;
+		return (leftDiagonal || rightDiagonal);
 	};
 
 	let checkVerticals = function() {
-		var leftVertical = gameBoard[0][0] === gameBoard[1][0] && gameBoard[1][0] === gameBoard[2][0] && gameBoard[1][0] !== null;
-		var middleVertical = gameBoard[0][1] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][1] && gameBoard[1][1] !== null;
-		var rightVertical = gameBoard[0][2] === gameBoard[1][2] && gameBoard[1][2] === gameBoard[2][2] && gameBoard[1][2] !== null;
+		var leftVertical = (gameBoard[0][0] === gameBoard[1][0] && gameBoard[1][0] === gameBoard[2][0] && gameBoard[1][0] !== null) ? gameBoard[0][0] : false;
+		var middleVertical = (gameBoard[0][1] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][1] && gameBoard[1][1] !== null) ? gameBoard[0][1] : false;
+		var rightVertical = (gameBoard[0][2] === gameBoard[1][2] && gameBoard[1][2] === gameBoard[2][2] && gameBoard[1][2] !== null) ? gameBoard[0][2] : false;
 
 		return (leftVertical || middleVertical || rightVertical);
 	};
 
 	let checkHorizontals = function() {
-		var leftHorizontal = gameBoard[0][0] === gameBoard[0][1] && gameBoard[0][1] === gameBoard[0][2] && gameBoard[0][1] !== null;
-		var middleHorizontal = gameBoard[1][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[1][2] && gameBoard[1][1] !== null;
-		var rightHorizontal = gameBoard[2][0] === gameBoard[2][1] && gameBoard[2][1] === gameBoard[2][2] && gameBoard[2][1] !== null;
+		var leftHorizontal = (gameBoard[0][0] === gameBoard[0][1] && gameBoard[0][1] === gameBoard[0][2] && gameBoard[0][1] !== null) ? gameBoard[0][0] : false;
+		var middleHorizontal = (gameBoard[1][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[1][2] && gameBoard[1][1] !== null) ? gameBoard[1][0] : false;
+		var rightHorizontal = (gameBoard[2][0] === gameBoard[2][1] && gameBoard[2][1] === gameBoard[2][2] && gameBoard[2][1] !== null) ? gameBoard[2][0] : false;
 
 		return (leftHorizontal || middleHorizontal || rightHorizontal);
 	};

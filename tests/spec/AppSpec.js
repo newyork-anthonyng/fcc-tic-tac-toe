@@ -107,7 +107,7 @@ describe('Game Logic', function() {
 
 			var result = game.checkForWinner();
 
-			expect(result).toBe(true);
+			expect(result).toBe('x');
 		});
 
 		it('should return true if there is a winner on horizontal', function() {
@@ -119,7 +119,7 @@ describe('Game Logic', function() {
 
 			var result = game.checkForWinner();
 
-			expect(result).toBe(true);
+			expect(result).toBe('x');
 		});
 
 		it('should return true if there is a winner on diagonal', function() {
@@ -131,7 +131,7 @@ describe('Game Logic', function() {
 
 			var result = game.checkForWinner();
 
-			expect(result).toBe(true);
+			expect(result).toBe('x');
 		});
 
 		it('should return false if there is no winner', function() {
