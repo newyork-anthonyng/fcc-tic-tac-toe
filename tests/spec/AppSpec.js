@@ -42,6 +42,12 @@ describe('Game Logic', function() {
 			expect(gameBoard[2][1]).toBe(null);
 			expect(gameBoard[2][2]).toBe(null);
 		});
+
+		it('should set currentPlayer to x', function() {
+			game.nextTurn();
+			game.resetGameBoard();
+			expect(game.getCurrentPlayer()).toEqual('x');
+		});
 	});
 
 	describe('#setGameBoard', function() {
@@ -51,14 +57,14 @@ describe('Game Logic', function() {
 
 		it('should set a square on the gameBoard', function() {
 			game.setGameBoard([1, 1], 'x');
-			gameBoard = game.getGameBoard();
+			var gameBoard = game.getGameBoard();
 
 			expect(gameBoard[1][1]).toEqual('x');
 		});
 
 		it('should do nothing if the coordinate is invalid', function() {
 			game.setGameBoard([5, 5], 'x');
-			gameBoard = game.getGameBoard();
+			var gameBoard = game.getGameBoard();
 
 			expect(gameBoard[0][0]).toBe(null);
 			expect(gameBoard[0][1]).toBe(null);
@@ -69,6 +75,15 @@ describe('Game Logic', function() {
 			expect(gameBoard[2][0]).toBe(null);
 			expect(gameBoard[2][1]).toBe(null);
 			expect(gameBoard[2][2]).toBe(null);
+		});
+
+		it('should do nothing if the coordinate is already occupied', function() {
+			game.setGameBoard([0, 1], 'x');
+			game.setGameBoard([0, 1], 'o');
+
+			var gameBoard = game.getGameBoard();
+
+			expect(gameBoard[0][1]).toEqual('x');
 		});
 	});
 
@@ -139,6 +154,10 @@ describe('Game Logic', function() {
 	});
 
 	describe('#nextTurn', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
 		it('should toggle the token of the current player', function() {
 			var result = game.getCurrentPlayer();
 			expect(result).toEqual('x');
@@ -146,6 +165,30 @@ describe('Game Logic', function() {
 			game.nextTurn();
 			result = game.getCurrentPlayer();
 			expect(result).toEqual('o');
+		});
+	});
+
+	describe('#playerTakesTurn', function() {
+		afterEach(function() {
+			game.resetGameBoard();
+		});
+
+		it('should set a square with the current player token', function() {
+			game.playerTakesTurn([0, 0]);
+			var gameBoard = game.getGameBoard();
+			expect(gameBoard[0][0]).toEqual('x');
+
+			game.playerTakesTurn([0, 1]);
+			var gameBoard = game.getGameBoard();
+			expect(gameBoard[0][1]).toEqual('o');
+		});
+
+		it('should not allow player to play on an occupied square', function() {
+			game.playerTakesTurn([0, 0]);
+			game.playerTakesTurn([0, 0]);
+
+			var gameBoard = game.getGameBoard();
+			expect(gameBoard[0][0]).toEqual('x');
 		});
 	});
 });

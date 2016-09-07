@@ -21,9 +21,13 @@ let game = (function() {
 		var y = coord[1];
 
 		var invalidCoord = (x < 0 || x > 2) || (y < 0 || y > 2);
-		if(invalidCoord) return;
+		if(invalidCoord) return false;
+
+		var isOccupied = gameBoard[x][y] !== null;
+		if(isOccupied) return false;
 
 		gameBoard[x][y] = token;
+		return true;
 	};
 
 	let resetGameBoard = function() {
@@ -32,6 +36,8 @@ let game = (function() {
 			[null, null, null],
 			[null, null, null]
 		];
+
+		currentPlayer = 'x';
 	};
 
 	let checkDiagonals = function() {
@@ -74,12 +80,18 @@ let game = (function() {
 		}
 	};
 
+	let playerTakesTurn = function(coord) {
+		var isValid = setGameBoard(coord, getCurrentPlayer());
+		if(isValid) nextTurn();
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
 		resetGameBoard: resetGameBoard,
 		checkForWinner: checkForWinner,
 		getCurrentPlayer: getCurrentPlayer,
-		nextTurn: nextTurn
+		nextTurn: nextTurn,
+		playerTakesTurn: playerTakesTurn
 	};
 })();
