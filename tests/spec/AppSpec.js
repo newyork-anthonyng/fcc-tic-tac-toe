@@ -71,4 +71,22 @@ describe('Game Logic', function() {
 			expect(gameBoard[2][2]).toBe(null);
 		});
 	});
+
+	describe('#checkDiagonals', function() {
+		it('should return false if the diagonal is all null', function() {
+			var result = game.checkDiagonals();
+
+			expect(result).toBe(false);
+		});
+
+		it('should return true if the diagonal all matches', function() {
+			game.setGameBoard([0, 0], 'x');
+			game.setGameBoard([1, 1], 'x');
+			game.setGameBoard([2, 2], 'x');
+
+			var result = game.checkDiagonals();
+
+			expect(result).toBe(true);
+		});
+	});
 });

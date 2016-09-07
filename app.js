@@ -44,9 +44,18 @@ let game = (function() {
 		];
 	};
 
+	let checkDiagonals = function() {
+		var leftDiagonal = gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2];
+		var rightDiagonal = gameBoard[0][2] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][0];
+		var notNull = !(gameBoard[1][1] === null);
+
+		return (leftDiagonal || rightDiagonal) && notNull;
+	};
+
 	return {
 		getGameBoard: getGameBoard,
 		setGameBoard: setGameBoard,
-		resetGameBoard: resetGameBoard
+		resetGameBoard: resetGameBoard,
+		checkDiagonals: checkDiagonals
 	};
 })();
