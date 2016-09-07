@@ -2,7 +2,34 @@
 
 $(function() {
 	console.log('app.js loaded.');
+
+	$('.square').click(function() {
+		console.log('You clicked me');
+		console.log($(this).data('coord'));
+		render();
+	});
 });
+
+function render() {
+	let gameBoard = game.getGameBoard();
+
+	renderSquares();
+}
+
+function renderSquares() {
+	$('.square').each(function() {
+		var myCoord = $(this).data('coord');
+		var myToken = gameBoard[myCoord[0]][myCoord[1]];
+
+		$(this).removeClass('player-x player-o');
+
+		if(myToken === 'x') {
+			$(this).addClass('player-x');
+		} else if(myToken === 'o') {
+			$(this).addClass('player-o');
+		}
+	});
+}
 
 let game = (function() {
 	let gameBoard = [
