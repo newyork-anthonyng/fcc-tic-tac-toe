@@ -11,6 +11,10 @@ let game = (function() {
 		[null, null, null]
 	];
 	let currentPlayer = 'x';
+	let score = {
+		x: 0,
+		o: 0
+	};
 
 	let getGameBoard = function() {
 		return gameBoard;
@@ -38,6 +42,10 @@ let game = (function() {
 		];
 
 		currentPlayer = 'x';
+		score = {
+			x: 0,
+			o: 0
+		};
 	};
 
 	let checkDiagonals = function() {
@@ -80,8 +88,15 @@ let game = (function() {
 	};
 
 	let playerTakesTurn = function(coord) {
-		var isValid = setGameBoard(coord, getCurrentPlayer());
-		if(isValid) nextTurn();
+		return setGameBoard(coord, getCurrentPlayer());
+	};
+
+	let getScore = function() {
+		return score;
+	};
+
+	let incrementScore = function(player) {
+		score[player]++;
 	};
 
 	return {
@@ -91,6 +106,8 @@ let game = (function() {
 		checkForWinner: checkForWinner,
 		getCurrentPlayer: getCurrentPlayer,
 		nextTurn: nextTurn,
-		playerTakesTurn: playerTakesTurn
+		playerTakesTurn: playerTakesTurn,
+		getScore: getScore,
+		incrementScore: incrementScore
 	};
 })();
