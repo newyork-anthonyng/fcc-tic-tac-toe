@@ -1,0 +1,28 @@
+.board {
+	border: 1px solid black;
+	margin: 0 auto;
+	max-width: 960px;
+}
+
+.square {
+	display: inline-block;
+	height: 200px;
+	width: 30%;
+	border: 1px dashed pink;
+}
+
+.player-x,
+.player-o {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+
+}
+
+.player-x {
+	background-image: url('./images/x.jpg');
+}
+
+.player-o {
+	background-image: url('./images/o.jpg');
+}
